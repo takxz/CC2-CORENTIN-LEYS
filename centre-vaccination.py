@@ -68,14 +68,18 @@ class CentreVaccination:
         self.liste_medecin.append(medecin)
 
     def traiter(self):
+        patient_traite = []
         for patient in self.file_patient:
             for medecin in self.liste_medecin:
                 if medecin.peut_vacciner(patient):
                     print(medecin.vaccine(patient))
-                    self.file_patient.remove(patient)
+                    patient_traite.append(patient)
                     break
             else:
                 print("Aucun médecin de disponible")
+
+        for patient in patient_traite:
+            self.file_patient.remove(patient)
 
     def taille_file(self):
         return f"Il y a {len(self.file_patient)} patient(s) dans la file"
@@ -105,6 +109,6 @@ centreVaccination.afficher_file()
 
 centreVaccination.traiter()
 
-print(centreVaccination.afficher_file())
+centreVaccination.afficher_file()
 
 
